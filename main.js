@@ -99,18 +99,30 @@ function animate() {
         ctx.fill();
     });
 
-    // Chorros relativistas
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-    ctx.lineWidth = 4;
-    ctx.beginPath();
-    ctx.moveTo(centerX, centerY);
-    ctx.lineTo(centerX, centerY - jetLength);
-    ctx.stroke();
+    // Chorros relativistas inclinados
+ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+ctx.lineWidth = 4;
 
-    ctx.beginPath();
-    ctx.moveTo(centerX, centerY);
-    ctx.lineTo(centerX, centerY + jetLength);
-    ctx.stroke();
+const angleOffset = Math.PI / 12; // pequeña inclinación (≈15 grados)
+
+// Chorro superior
+ctx.beginPath();
+ctx.moveTo(centerX, centerY);
+ctx.lineTo(
+    centerX + jetLength * Math.sin(angleOffset),
+    centerY - jetLength * Math.cos(angleOffset)
+);
+ctx.stroke();
+
+// Chorro inferior
+ctx.beginPath();
+ctx.moveTo(centerX, centerY);
+ctx.lineTo(
+    centerX - jetLength * Math.sin(angleOffset),
+    centerY + jetLength * Math.cos(angleOffset)
+);
+ctx.stroke();
+
 
     requestAnimationFrame(animate);
 }
